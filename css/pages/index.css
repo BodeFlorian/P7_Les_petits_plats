@@ -1,1 +1,195 @@
-@import './../base/style.css';/*# sourceMappingURL=index.css.map */
+@import './../base/style.css';
+@import './../layout/header.css';
+main {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+}
+main section {
+  padding: 0px 160px;
+}
+main .hero {
+  background-image: url("./../../asset/img/hero-bg.jpg");
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+  height: 64vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 32px;
+}
+main .hero h1 {
+  color: var(--accentColor);
+  font-family: "Anton";
+  font-size: 48px;
+  text-align: center;
+}
+main .hero .search-bar form {
+  background-color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-radius: 12px;
+  padding: 8px 8px;
+  min-width: 50vw;
+}
+main .hero .search-bar form input[name=search] {
+  flex: 1;
+  padding: 0px 16px;
+}
+main .hero .search-bar form #search-submit {
+  aspect-ratio: 1/1;
+  cursor: pointer;
+  border-radius: 8px;
+  background-color: var(--textColor);
+  min-width: 5%;
+  display: flex;
+  align-items: center;
+  transition: background-color 0.3s;
+}
+main .hero .search-bar form #search-submit::after {
+  content: "";
+  background-image: url("./../../asset/svg/loop.svg");
+  background-repeat: no-repeat;
+  background-position: center;
+  width: 100%;
+  height: 100%;
+  transition: filter 0.3s;
+}
+main .hero .search-bar form #search-submit:hover {
+  background-color: var(--accentColor);
+}
+main .hero .search-bar form #search-submit:hover::after {
+  filter: invert(100%);
+}
+main .filter {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+main .filter .dropdown-filter {
+  display: flex;
+  gap: 32px;
+}
+main .filter .dropdown-filter .dropdown {
+  width: 100%;
+  background-color: #fff;
+  border-radius: 8px;
+  overflow: hidden;
+}
+main .filter .dropdown-filter .dropdown__title {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-weight: 600;
+  width: 100%;
+  padding: 16px 16px;
+  gap: 64px;
+}
+main .filter .dropdown-filter .dropdown__title::after {
+  content: "";
+  background-image: url("./../../asset/svg/arrow.svg");
+  background-repeat: no-repeat;
+  background-position: center;
+  width: 16px;
+  height: 16px;
+}
+main .filter .dropdown-filter .dropdown__active {
+  padding: 0px 16px 16px 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+main .filter .dropdown-filter .dropdown__active .search-bar form {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border: 1px solid #C6C6C6;
+  border-radius: 8px;
+  padding: 4px;
+}
+main .filter .dropdown-filter .dropdown__active .search-bar form .dropdown-search-submit {
+  background-image: url("./../../asset/svg/loop.svg");
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+  width: 16px;
+  height: 16px;
+  filter: invert(1);
+}
+main .filter .dropdown-filter .dropdown__suggest {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  max-height: 20vh;
+  overflow-y: scroll;
+}
+main .filter .recipes-number {
+  font-family: "Anton";
+}
+main .recipes {
+  margin-top: 32px;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 64px;
+}
+main .recipes .recipe {
+  border-radius: 8px;
+  overflow: hidden;
+  background-color: #fff;
+}
+main .recipes .recipe__img {
+  position: relative;
+}
+main .recipes .recipe__img img {
+  height: 16rem;
+  background-position: center;
+  -o-object-fit: cover;
+     object-fit: cover;
+  background-size: cover;
+}
+main .recipes .recipe__img::after {
+  position: absolute;
+  content: "10min";
+  background-color: var(--accentColor);
+  top: 0;
+  right: 0;
+  margin-top: 16px;
+  margin-right: 24px;
+  padding: 4px;
+  border-radius: 8px;
+  font-weight: 600;
+}
+main .recipes .recipe__content {
+  padding: 32px 32px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+main .recipes .recipe__title {
+  font-family: "Anton";
+}
+main .recipes .recipe__description {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+main .recipes .recipe__ingredients {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+main .recipes .recipe__ingredients-wrapper {
+  display: grid;
+  gap: 16px;
+  grid-template-columns: repeat(2, 1fr);
+}
+
+::-webkit-scrollbar {
+  display: none;
+}/*# sourceMappingURL=index.css.map */

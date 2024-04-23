@@ -6,6 +6,7 @@
 /*─
 /*─────────────────────────────────────────────────────────────────────────────────────────────────*/
 /*─────────────────────────────────────────────────────────────────────────────────────────────────*/
+@import './../utils/variables.css';
 * {
   box-sizing: border-box;
 }
@@ -117,6 +118,11 @@ iframe {
   height: 100%;
 }
 
+* {
+  margin: 0;
+  padding: 0;
+}
+
 @font-face {
   font-family: "Manrope";
   src: url("./../../asset/font/Manrope/Manrope-ExtraLight.woff2") format("woff2"), url("./../../asset/font/Manrope/Manrope-ExtraLight.woff") format("woff");
@@ -134,4 +140,6 @@ iframe {
 body {
   font-size: 16px;
   font-family: "Manrope";
+  background-color: var(--backgroundColor);
+  color: var(--textColor);
 }/*# sourceMappingURL=style.css.map */
