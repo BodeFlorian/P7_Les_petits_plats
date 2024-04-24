@@ -225,6 +225,11 @@ main{
                 p{
                     font-weight: 600;
                     font-size: 16px;
+                    overflow: hidden;
+                    display: -webkit-box;
+                    -webkit-box-orient: vertical;
+                    -webkit-line-clamp: 3;
+                    text-overflow: ellipsis;
                 }
             }
 
