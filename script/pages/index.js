@@ -4,6 +4,13 @@ const recipesDOM = document.querySelector('.recipes');
 const dropdownDOM = document.querySelectorAll('.dropdown');
 const dropdownActiveDOM = document.querySelectorAll('.dropdown__active');
 
+/**
+ * Permet de créer un élément HTML;
+ * @param {string} tag - Tag de l'élément HTML
+ * @param {string} content - Contenu de l'élément HTML
+ * @param {string} cssClass - Classe de l'élément HTML
+ * @return {HTMLElement} - Élément HTML
+ */
 const createBlock = function (tag, content, cssClass) {
   const element = document.createElement(tag);
   if (cssClass !== undefined) {
@@ -13,6 +20,9 @@ const createBlock = function (tag, content, cssClass) {
   return element;
 };
 
+/**
+ * Affiche 6 recettes sur la page d'accueil (sans filtre)
+ */
 const createRecipeDOM = () => {
   recipes.slice(0, 6).forEach((recipe) => {
     const recipeDiv = createBlock('div', '', 'recipe');
@@ -66,13 +76,20 @@ const createRecipeDOM = () => {
   });
 };
 
+/**
+ * Ferme les dropdown menus
+ */
 const closeDropdowns = () => {
   dropdownActiveDOM.forEach((dropdown) => {
     dropdown.style.display = 'none';
   });
 };
 
-createRecipeDOM();
+const init = () => {
+  createRecipeDOM();
+};
+
+init();
 
 dropdownDOM.forEach((dropdown) => {
   dropdown.addEventListener('click', (e) => {
