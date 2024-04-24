@@ -48,7 +48,8 @@ main .hero .search-bar form #search-submit {
   cursor: pointer;
   border-radius: 8px;
   background-color: var(--textColor);
-  min-width: 5%;
+  min-width: 42px;
+  min-height: 42px;
   display: flex;
   align-items: center;
   transition: background-color 0.3s;

@@ -9,7 +9,7 @@ const dropdownActiveDOM = document.querySelectorAll('.dropdown__active');
  * @param {string} tag - Tag de l'élément HTML
  * @param {string} content - Contenu de l'élément HTML
  * @param {string} cssClass - Classe de l'élément HTML
- * @return {HTMLElement} - Élément HTML
+ * @returns {HTMLElement} - Élément HTML
  */
 const createBlock = function (tag, content, cssClass) {
   const element = document.createElement(tag);
@@ -85,8 +85,94 @@ const closeDropdowns = () => {
   });
 };
 
+/**
+ * Retourne tous les ingrédients existants
+ * @returns {Array} - Ingrédients disponibles
+ */
+const allIngredients = () => {
+  let ingredients = [];
+
+  recipes.forEach((recipe) => {
+    recipe.ingredients.forEach((item) => {
+      if (ingredients.indexOf(item.ingredient) === -1) {
+        // Si l'ingrédient n'est pas encore dans le tableau
+        ingredients.push(item.ingredient);
+      }
+    });
+  });
+
+  return ingredients;
+};
+
+/**
+ * Retourne tous les appareils exitants
+ * @returns {Array} - Appareils disponibles
+ */
+const allAppliance = () => {
+  let appliances = [];
+
+  recipes.forEach((recipe) => {
+    if (appliances.indexOf(recipe.appliance) === -1) {
+      // Si l'appareil n'est pas encore dans le tableau
+      appliances.push(recipe.appliance);
+    }
+  });
+
+  return appliances;
+};
+
+/**
+ * Retourne tous les ustensiles existants
+ * @returns {Array} - Ustensiles disponibles
+ */
+const allUstensils = () => {
+  let ustensils = [];
+
+  recipes.forEach((recipe) => {
+    recipe.ustensils.forEach((item) => {
+      if (ustensils.indexOf(item) === -1) {
+        // Si l'ustensile n'est pas encore dans le tableau
+        ustensils.push(item);
+      }
+    });
+  });
+
+  return ustensils;
+};
+
+const dropdownInit = () => {
+  dropdownDOM.forEach((dropdown) => {
+    const suggest = dropdown.querySelector('.dropdown__suggest');
+
+    switch (dropdown.firstElementChild.innerText) {
+      case 'Ingrédients':
+        const ingredients = allIngredients();
+        ingredients.forEach((i) => {
+          const el = createBlock('li', i, 'dropdown__suggest-item');
+          suggest.appendChild(el);
+        });
+        break;
+      case 'Appareils':
+        const appareils = allAppliance();
+        appareils.forEach((i) => {
+          const el = createBlock('li', i, 'dropdown__suggest-item');
+          suggest.appendChild(el);
+        });
+        break;
+      case 'Ustensiles':
+        const ustensiles = allUstensils();
+        ustensiles.forEach((i) => {
+          const el = createBlock('li', i, 'dropdown__suggest-item');
+          suggest.appendChild(el);
+        });
+        break;
+    }
+  });
+};
+
 const init = () => {
   createRecipeDOM();
+  dropdownInit();
 };
 
 init();
