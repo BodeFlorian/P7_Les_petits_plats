@@ -3,6 +3,8 @@ import recipes from './../../data/recipes.js';
 const recipesDOM = document.querySelector('.recipes');
 const dropdownDOM = document.querySelectorAll('.dropdown');
 const dropdownActiveDOM = document.querySelectorAll('.dropdown__active');
+const searchBar = document.querySelector('#search');
+const recipesNumber = document.querySelector('.recipes-number');
 
 /**
  * Permet de créer un élément HTML;
@@ -21,10 +23,14 @@ const createBlock = function (tag, content, cssClass) {
 };
 
 /**
- * Affiche 6 recettes sur la page d'accueil (sans filtre)
+ * Affiche les recettes sur la page d'accueil
+ * @param {Array} x - Tableau de recette
  */
-const createRecipeDOM = () => {
-  recipes.slice(0, 6).forEach((recipe) => {
+const createRecipeDOM = (x) => {
+  recipesDOM.innerHTML = '';
+
+  x.forEach((recipe) => {
+    console.log(recipe);
     const recipeDiv = createBlock('div', '', 'recipe');
 
     const recipeImg = createBlock('div', '', 'recipe__img');
@@ -173,8 +179,27 @@ const dropdownInit = () => {
   });
 };
 
+/**
+ * Retourne le résultat de la recherche d'un utilisateur
+ * @param {string} query - Recherche d'un utilisateur
+ * @returns {Array} - Tableau des résultats
+ */
+const searchRecipes = (query) => {
+  query = query.toLowerCase(); // On va travailler avec le lowerCase
+
+  return recipes.filter((recipe) => {
+    return (
+      recipe.name.toLowerCase().includes(query) ||
+      recipe.description.toLowerCase().includes(query) ||
+      recipe.ingredients.some((ingredient) => {
+        ingredient.ingredient.toLowerCase().includes(query);
+      })
+    );
+  });
+};
+
 const init = () => {
-  createRecipeDOM();
+  createRecipeDOM(recipes.slice(0, 6)); //Initialisation du site avec 6 recettes sans filtre.
   dropdownInit();
 };
 
@@ -192,4 +217,10 @@ document.addEventListener('click', (e) => {
   e.preventDefault();
   e.stopPropagation();
   closeDropdowns();
+});
+
+searchBar.addEventListener('keyup', (e) => {
+  const query = searchRecipes(e.currentTarget.value);
+  recipesNumber.innerText = `${query.length > 0 ? query.length + ' recettes' : '0 recette'}`;
+  createRecipeDOM(query);
 });
