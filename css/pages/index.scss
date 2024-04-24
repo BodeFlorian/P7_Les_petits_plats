@@ -8,7 +8,11 @@ main{
     gap: 32px;
 
     section {
-        padding: 0px 160px;
+        padding: 0px 40px;
+
+        &:last-child{
+            padding-bottom: 80px;
+        }
     }
 
     .hero{
@@ -78,6 +82,8 @@ main{
     }
 
     .filter{
+        max-width: 1440px;
+        margin: auto;
         display: flex;
         justify-content: space-between;
         align-items: center;
@@ -157,21 +163,26 @@ main{
     }
 
     .recipes{
+        max-width: 1440px;
+        margin: auto;
         margin-top: 32px;
         display: grid;
         grid-template-columns: repeat(3, 1fr);
-        gap: 64px;
+        gap: 48px;
 
         .recipe{
-            border-radius: 8px;
+            border-radius: 12px;
             overflow: hidden;
             background-color: #fff;
+            display: flex;
+            flex-direction: column;
 
             &__img{
                 position: relative;
+                flex: 1;
 
                 img {
-                    height: 16rem;
+                    height: 12rem;
                     background-position: center;
                     object-fit: cover;
                     background-size: cover;
@@ -200,12 +211,24 @@ main{
 
             &__title {
                 font-family: 'Anton';
+                font-size: 18px;
             }
 
             &__description{
                 display: flex;
                 flex-direction: column;
                 gap: 16px;
+
+                h4{
+                    text-transform: uppercase;
+                    color: #7A7A7A;
+                    font-size: 14px;
+                }
+
+                p{
+                    font-weight: 600;
+                    font-size: 16px;
+                }
             }
 
             &__ingredients{
@@ -213,10 +236,23 @@ main{
                 flex-direction: column;
                 gap: 16px;
 
+                h4{
+                    text-transform: uppercase;
+                    color: #7A7A7A;
+                    font-size: 14px;
+                }
+
                 &-wrapper{
                     display: grid;
                     gap: 16px;
                     grid-template-columns: repeat(2, 1fr);
+                }
+            }
+
+            &__ingredient{
+                h5{
+                    font-weight: 600;
+                    font-size: 16px;
                 }
             }
         }

@@ -7,7 +7,10 @@ main {
   gap: 32px;
 }
 main section {
-  padding: 0px 160px;
+  padding: 0px 40px;
+}
+main section:last-child {
+  padding-bottom: 80px;
 }
 main .hero {
   background-image: url("./../../asset/img/hero-bg.jpg");
@@ -66,6 +69,8 @@ main .hero .search-bar form #search-submit:hover::after {
   filter: invert(100%);
 }
 main .filter {
+  max-width: 1440px;
+  margin: auto;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -133,21 +138,26 @@ main .filter .recipes-number {
   font-family: "Anton";
 }
 main .recipes {
+  max-width: 1440px;
+  margin: auto;
   margin-top: 32px;
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  gap: 64px;
+  gap: 48px;
 }
 main .recipes .recipe {
-  border-radius: 8px;
+  border-radius: 12px;
   overflow: hidden;
   background-color: #fff;
+  display: flex;
+  flex-direction: column;
 }
 main .recipes .recipe__img {
   position: relative;
+  flex: 1;
 }
 main .recipes .recipe__img img {
-  height: 16rem;
+  height: 12rem;
   background-position: center;
   -o-object-fit: cover;
      object-fit: cover;
@@ -173,21 +183,40 @@ main .recipes .recipe__content {
 }
 main .recipes .recipe__title {
   font-family: "Anton";
+  font-size: 18px;
 }
 main .recipes .recipe__description {
   display: flex;
   flex-direction: column;
   gap: 16px;
 }
+main .recipes .recipe__description h4 {
+  text-transform: uppercase;
+  color: #7A7A7A;
+  font-size: 14px;
+}
+main .recipes .recipe__description p {
+  font-weight: 600;
+  font-size: 16px;
+}
 main .recipes .recipe__ingredients {
   display: flex;
   flex-direction: column;
   gap: 16px;
 }
+main .recipes .recipe__ingredients h4 {
+  text-transform: uppercase;
+  color: #7A7A7A;
+  font-size: 14px;
+}
 main .recipes .recipe__ingredients-wrapper {
   display: grid;
   gap: 16px;
   grid-template-columns: repeat(2, 1fr);
+}
+main .recipes .recipe__ingredient h5 {
+  font-weight: 600;
+  font-size: 16px;
 }
 
 ::-webkit-scrollbar {
