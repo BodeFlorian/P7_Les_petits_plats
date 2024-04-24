@@ -125,7 +125,7 @@ main .filter .dropdown-filter .dropdown__active .search-bar form {
   justify-content: space-between;
   border: 1px solid #C6C6C6;
   border-radius: 8px;
-  padding: 4px;
+  padding: 4px 8px;
 }
 main .filter .dropdown-filter .dropdown__active .search-bar form input {
   width: 90%;
@@ -145,6 +145,9 @@ main .filter .dropdown-filter .dropdown__suggest {
   gap: 8px;
   max-height: 20vh;
   overflow-y: scroll;
+}
+main .filter .dropdown-filter .dropdown__suggest-item {
+  cursor: pointer;
 }
 main .filter .recipes-number {
   font-family: "Anton";
