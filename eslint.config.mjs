@@ -1,8 +1,9 @@
 import globals from 'globals';
 import path from 'path';
 import { fileURLToPath } from 'url';
-import { FlatCompat } from '@eslint/eslintrc';
-import pluginJs from '@eslint/js';
+import { FlatCompat } from '@eslint/eslintrc/lib/shared/flat-compat';
+import { ConfigArrayFactory } from '@eslint/eslintrc/lib/shared/config-array-factory';
+import pluginJs from '@eslint/eslintrc/lib/configs/javascript';
 
 // Import de Prettier
 import prettierConfig from 'eslint-config-prettier';
@@ -10,10 +11,8 @@ import prettierConfig from 'eslint-config-prettier';
 // mimic CommonJS variables -- not needed if using CommonJS
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
-const compat = new FlatCompat({
-  baseDirectory: __dirname,
-  recommendedConfig: pluginJs.configs.recommended
-});
+const configArrayFactory = new ConfigArrayFactory({ baseDirectory: __dirname });
+const compat = new FlatCompat({ configArrayFactory });
 
 export default [
   { files: ['**/*.js'], languageOptions: { sourceType: 'script' } },
