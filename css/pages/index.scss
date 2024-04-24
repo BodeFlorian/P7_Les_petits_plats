@@ -174,15 +174,12 @@ main{
             border-radius: 12px;
             overflow: hidden;
             background-color: #fff;
-            display: flex;
-            flex-direction: column;
-
+            
             &__img{
                 position: relative;
-                flex: 1;
 
                 img {
-                    height: 12rem;
+                    max-height: 12rem;
                     background-position: center;
                     object-fit: cover;
                     background-size: cover;

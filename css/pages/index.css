@@ -149,15 +149,12 @@ main .recipes .recipe {
   border-radius: 12px;
   overflow: hidden;
   background-color: #fff;
-  display: flex;
-  flex-direction: column;
 }
 main .recipes .recipe__img {
   position: relative;
-  flex: 1;
 }
 main .recipes .recipe__img img {
-  height: 12rem;
+  max-height: 12rem;
   background-position: center;
   -o-object-fit: cover;
      object-fit: cover;
