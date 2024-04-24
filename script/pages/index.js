@@ -1,6 +1,8 @@
 import recipes from './../../data/recipes.js';
 
 const recipesDOM = document.querySelector('.recipes');
+const dropdownDOM = document.querySelectorAll('.dropdown');
+const dropdownActiveDOM = document.querySelectorAll('.dropdown__active');
 
 const createBlock = function (tag, content, cssClass) {
   const element = document.createElement(tag);
@@ -64,4 +66,22 @@ const createRecipeDOM = () => {
   });
 };
 
+const closeDropdowns = () => {
+  dropdownActiveDOM.forEach((dropdown) => {
+    dropdown.style.display = 'none';
+  });
+};
+
 createRecipeDOM();
+
+dropdownDOM.forEach((dropdown) => {
+  dropdown.addEventListener('click', (e) => {
+    e.preventDefault();
+    e.stopPropagation();
+    e.currentTarget.querySelector('.dropdown__active').style.display = 'flex';
+  });
+});
+
+document.addEventListener('click', (e) => {
+  closeDropdowns();
+});
