@@ -148,6 +148,7 @@ main .filter .dropdown-filter .dropdown__suggest {
 }
 main .filter .dropdown-filter .dropdown__suggest-item {
   cursor: pointer;
+  text-transform: capitalize;
 }
 main .filter .recipes-number {
   font-family: "Anton";

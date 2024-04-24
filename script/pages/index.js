@@ -140,6 +140,9 @@ const allUstensils = () => {
   return ustensils;
 };
 
+/**
+ * Initialise les dropdown avec leur item associé
+ */
 const dropdownInit = () => {
   dropdownDOM.forEach((dropdown) => {
     const suggest = dropdown.querySelector('.dropdown__suggest');
@@ -186,5 +189,7 @@ dropdownDOM.forEach((dropdown) => {
 });
 
 document.addEventListener('click', (e) => {
+  e.preventDefault();
+  e.stopPropagation();
   closeDropdowns();
 });
