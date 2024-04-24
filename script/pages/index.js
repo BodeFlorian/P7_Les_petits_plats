@@ -221,6 +221,6 @@ document.addEventListener('click', (e) => {
 
 searchBar.addEventListener('keyup', (e) => {
   const query = searchRecipes(e.currentTarget.value);
-  recipesNumber.innerText = `${query.length > 0 ? query.length + ' recettes' : '0 recette'}`;
+  recipesNumber.innerText = `${query.length > 1 ? query.length + ' recettes' : query.length + ' recette'}`;
   createRecipeDOM(query);
 });
