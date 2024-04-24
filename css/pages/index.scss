@@ -127,13 +127,14 @@ main{
                     margin-top: -4px;
                     background-color: #fff;
                     z-index: 2;
-                    padding: 8px 16px 16px 16px;
                     display: none;
                     flex-direction: column;
                     gap: 16px;
                     border-radius: 0 0 8px 8px;
 
                     .search-bar{
+                        padding: 8px 16px 0px 16px;
+
                         form{
                             position: relative;
                             display: flex;
@@ -161,15 +162,18 @@ main{
                 }
 
                 &__suggest{
-                    display: flex;
-                    flex-direction: column;
-                    gap: 8px;
                     max-height: 20vh;
                     overflow-y: scroll;
                     
                     &-item{
                         cursor: pointer;
                         text-transform: capitalize;
+                        padding: 8px 16px;
+                        transition: background-color .3s;
+
+                        &:hover{
+                            background-color: var(--accentColor);
+                        }
                     }
                 }
             }

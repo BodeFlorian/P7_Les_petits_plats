@@ -112,11 +112,13 @@ main .filter .dropdown-filter .dropdown__active {
   margin-top: -4px;
   background-color: #fff;
   z-index: 2;
-  padding: 8px 16px 16px 16px;
   display: none;
   flex-direction: column;
   gap: 16px;
   border-radius: 0 0 8px 8px;
+}
+main .filter .dropdown-filter .dropdown__active .search-bar {
+  padding: 8px 16px 0px 16px;
 }
 main .filter .dropdown-filter .dropdown__active .search-bar form {
   position: relative;
@@ -140,15 +142,17 @@ main .filter .dropdown-filter .dropdown__active .search-bar form .dropdown-searc
   filter: invert(1);
 }
 main .filter .dropdown-filter .dropdown__suggest {
-  display: flex;
-  flex-direction: column;
-  gap: 8px;
   max-height: 20vh;
   overflow-y: scroll;
 }
 main .filter .dropdown-filter .dropdown__suggest-item {
   cursor: pointer;
   text-transform: capitalize;
+  padding: 8px 16px;
+  transition: background-color 0.3s;
+}
+main .filter .dropdown-filter .dropdown__suggest-item:hover {
+  background-color: var(--accentColor);
 }
 main .filter .recipes-number {
   font-family: "Anton";
