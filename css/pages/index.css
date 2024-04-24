@@ -77,13 +77,14 @@ main .filter {
 }
 main .filter .dropdown-filter {
   display: flex;
+  align-items: flex-start;
   gap: 32px;
 }
 main .filter .dropdown-filter .dropdown {
   width: 100%;
   background-color: #fff;
   border-radius: 8px;
-  overflow: hidden;
+  position: relative;
 }
 main .filter .dropdown-filter .dropdown__title {
   position: relative;
@@ -94,6 +95,7 @@ main .filter .dropdown-filter .dropdown__title {
   width: 100%;
   padding: 16px 16px;
   gap: 64px;
+  z-index: 1;
 }
 main .filter .dropdown-filter .dropdown__title::after {
   content: "";
@@ -104,10 +106,16 @@ main .filter .dropdown-filter .dropdown__title::after {
   height: 16px;
 }
 main .filter .dropdown-filter .dropdown__active {
-  padding: 0px 16px 16px 16px;
-  display: flex;
+  position: absolute;
+  width: 100%;
+  margin-top: -4px;
+  background-color: #fff;
+  z-index: 2;
+  padding: 8px 16px 16px 16px;
+  display: none;
   flex-direction: column;
   gap: 16px;
+  border-radius: 0 0 8px 8px;
 }
 main .filter .dropdown-filter .dropdown__active .search-bar form {
   position: relative;
@@ -117,6 +125,9 @@ main .filter .dropdown-filter .dropdown__active .search-bar form {
   border: 1px solid #C6C6C6;
   border-radius: 8px;
   padding: 4px;
+}
+main .filter .dropdown-filter .dropdown__active .search-bar form input {
+  width: 90%;
 }
 main .filter .dropdown-filter .dropdown__active .search-bar form .dropdown-search-submit {
   background-image: url("./../../asset/svg/loop.svg");
@@ -154,7 +165,7 @@ main .recipes .recipe__img {
   position: relative;
 }
 main .recipes .recipe__img img {
-  max-height: 12rem;
+  max-height: 14rem;
   background-position: center;
   -o-object-fit: cover;
      object-fit: cover;

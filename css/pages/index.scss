@@ -90,13 +90,14 @@ main{
 
         .dropdown-filter{
             display: flex;
+            align-items: flex-start;
             gap: 32px;
 
             .dropdown{
                 width: 100%;
                 background-color: #fff;
                 border-radius: 8px;
-                overflow: hidden;
+                position: relative;
 
                 &__title{
                     position: relative;
@@ -107,6 +108,7 @@ main{
                     width: 100%;
                     padding: 16px 16px;
                     gap: 64px;
+                    z-index: 1;
 
                     &::after{
                         content: '';
@@ -119,10 +121,16 @@ main{
                 }
 
                 &__active{
-                    padding: 0px 16px 16px 16px;
-                    display: flex;
+                    position: absolute;
+                    width: 100%;
+                    margin-top: -4px;
+                    background-color: #fff;
+                    z-index: 2;
+                    padding: 8px 16px 16px 16px;
+                    display: none;
                     flex-direction: column;
                     gap: 16px;
+                    border-radius: 0 0 8px 8px;
 
                     .search-bar{
                         form{
@@ -133,6 +141,10 @@ main{
                             border: 1px solid #C6C6C6;
                             border-radius: 8px;
                             padding: 4px;
+
+                            input{
+                                width: 90%;
+                            }
 
                             .dropdown-search-submit{
                                 background-image: url('./../../asset/svg/loop.svg');
@@ -179,7 +191,7 @@ main{
                 position: relative;
 
                 img {
-                    max-height: 12rem;
+                    max-height: 14rem;
                     background-position: center;
                     object-fit: cover;
                     background-size: cover;
