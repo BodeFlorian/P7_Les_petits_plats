@@ -27,11 +27,7 @@ const createRecipeDOM = () => {
 
     const recipeDescription = createBlock('div', '', 'recipe__description');
     const recipeDescriptionTitle = createBlock('h4', 'Recette', '');
-    const recipeDescriptionTuto = createBlock(
-      'p',
-      "Mettre les glaçons à votre goût dans le blender, Ajouter le lait la crème de coco, le jus de 2 citrons et le sucre ensemble. Mixer jusqu'à obtenir la consistance désirée.",
-      ''
-    );
+    const recipeDescriptionTuto = createBlock('p', recipe.description, '');
     recipeDescription.appendChild(recipeDescriptionTitle);
     recipeDescription.appendChild(recipeDescriptionTuto);
 
