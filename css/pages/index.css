@@ -157,6 +157,35 @@ main .filter .dropdown-filter .dropdown__suggest-item:hover {
 main .filter .recipes-number {
   font-family: "Anton";
 }
+main .active-filter {
+  max-width: 1440px;
+  margin: auto;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 32px;
+}
+main .active-filter li {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 64px;
+  border-radius: 8px;
+  font-weight: 600;
+  padding: 16px 16px;
+  background-color: var(--accentColor);
+  text-transform: capitalize;
+}
+main .active-filter li::after {
+  content: "";
+  background-image: url("./../../asset/svg/cross.svg");
+  background-repeat: no-repeat;
+  background-position: center;
+  width: 16px;
+  height: 16px;
+  cursor: pointer;
+}
 main .recipes {
   max-width: 1440px;
   margin: auto;

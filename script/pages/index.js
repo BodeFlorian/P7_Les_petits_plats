@@ -5,6 +5,9 @@ const dropdownDOM = document.querySelectorAll('.dropdown');
 const dropdownActiveDOM = document.querySelectorAll('.dropdown__active');
 const searchBarForm = document.querySelector('#search');
 const recipesNumber = document.querySelector('.recipes-number');
+const activeFilterDOM = document.querySelector('.active-filter');
+
+let filters = [];
 
 /**
  * Permet de créer un élément HTML;
@@ -78,6 +81,19 @@ const createRecipeDOM = (x) => {
     recipeDiv.appendChild(recipeContent);
 
     recipesDOM.appendChild(recipeDiv);
+  });
+};
+
+/**
+ * Affiche les filtres actuels
+ * @param {Array} x - Tableau de filtre
+ */
+const createFilterDOM = (x) => {
+  activeFilterDOM.innerHTML = '';
+
+  x.forEach((filter) => {
+    const filterDOM = createBlock('li', filter);
+    activeFilterDOM.appendChild(filterDOM);
   });
 };
 
@@ -188,6 +204,7 @@ const searchRecipes = (query) => {
 
   return recipes.filter((recipe) => {
     return (
+      // Recherche parmis les titres, descriptions et ingredients
       recipe.name.toLowerCase().includes(query) ||
       recipe.description.toLowerCase().includes(query) ||
       recipe.ingredients.some((ingredient) => {
@@ -222,7 +239,9 @@ searchBarForm.addEventListener('submit', (e) => {
   e.preventDefault();
   e.stopPropagation();
   const query = e.currentTarget.querySelector('input').value;
+  filters.push(query); // Ajout de la requete dans le tableau des filtres
   const queryResult = searchRecipes(query);
   recipesNumber.innerText = `${queryResult.length > 1 ? queryResult.length + ' recettes' : queryResult.length + ' recette'}`;
   createRecipeDOM(queryResult);
+  createFilterDOM(filters);
 });
