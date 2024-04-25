@@ -128,6 +128,60 @@ const closeDropdowns = () => {
 };
 
 /**
+ * Initialise les dropdown avec leur item associé
+ */
+const dropdownInit = () => {
+  dropdownDOM.forEach((dropdown) => {
+    const suggest = dropdown.querySelector('.dropdown__suggest');
+    let items = [];
+
+    switch (dropdown.firstElementChild.innerText) {
+      case 'Ingrédients':
+        items = allIngredients();
+        break;
+      case 'Appareils':
+        items = allAppliance();
+        break;
+      case 'Ustensiles':
+        items = allUstensils();
+        break;
+    }
+
+    items.forEach((i) => {
+      const el = createBlock('li', i, 'dropdown__suggest-item');
+      el.addEventListener('click', (e) => {
+        const query = e.target.innerText;
+        filters.push(query.toLowerCase()); // Ajout de la requete dans le tableau des filtres
+        const queryResult = searchRecipes(filters);
+        createRecipeDOM(queryResult);
+        createFilterDOM(filters);
+      });
+      suggest.appendChild(el);
+    });
+  });
+
+  // Filtrage dans les dropdowns
+  dropdownActiveDOM.forEach((dropdownActive) => {
+    const searchInput = dropdownActive.querySelector('input[type="search"]');
+    searchInput.addEventListener('input', () => {
+      const searchTerm = searchInput.value.toLowerCase();
+      const dropdownList = dropdownActive.querySelector('.dropdown__suggest');
+      const dropdownItems = dropdownList.querySelectorAll(
+        '.dropdown__suggest-item'
+      );
+      dropdownItems.forEach((item) => {
+        const itemName = item.innerText.toLowerCase();
+        if (itemName.includes(searchTerm)) {
+          item.style.display = 'block';
+        } else {
+          item.style.display = 'none';
+        }
+      });
+    });
+  });
+};
+
+/**
  * Retourne tous les ingrédients existants
  * @returns {Array} - Ingrédients disponibles
  */
@@ -180,59 +234,6 @@ const allUstensils = () => {
   });
 
   return ustensils;
-};
-
-/**
- * Initialise les dropdown avec leur item associé
- */
-const dropdownInit = () => {
-  dropdownDOM.forEach((dropdown) => {
-    const suggest = dropdown.querySelector('.dropdown__suggest');
-
-    switch (dropdown.firstElementChild.innerText) {
-      case 'Ingrédients':
-        const ingredients = allIngredients();
-        ingredients.forEach((i) => {
-          const el = createBlock('li', i, 'dropdown__suggest-item');
-          suggest.appendChild(el);
-        });
-        break;
-      case 'Appareils':
-        const appareils = allAppliance();
-        appareils.forEach((i) => {
-          const el = createBlock('li', i, 'dropdown__suggest-item');
-          suggest.appendChild(el);
-        });
-        break;
-      case 'Ustensiles':
-        const ustensiles = allUstensils();
-        ustensiles.forEach((i) => {
-          const el = createBlock('li', i, 'dropdown__suggest-item');
-          suggest.appendChild(el);
-        });
-        break;
-    }
-  });
-
-  // Filtrage dans les dropdowns
-  dropdownActiveDOM.forEach((dropdownActive) => {
-    const searchInput = dropdownActive.querySelector('input[type="search"]');
-    searchInput.addEventListener('input', () => {
-      const searchTerm = searchInput.value.toLowerCase();
-      const dropdownList = dropdownActive.querySelector('.dropdown__suggest');
-      const dropdownItems = dropdownList.querySelectorAll(
-        '.dropdown__suggest-item'
-      );
-      dropdownItems.forEach((item) => {
-        const itemName = item.innerText.toLowerCase();
-        if (itemName.includes(searchTerm)) {
-          item.style.display = 'block';
-        } else {
-          item.style.display = 'none';
-        }
-      });
-    });
-  });
 };
 
 /**
