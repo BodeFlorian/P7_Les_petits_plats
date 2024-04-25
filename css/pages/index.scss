@@ -188,9 +188,10 @@ main{
         max-width: 1440px;
         margin: auto;
         display: none;
-        justify-content: space-between;
+        justify-content: flex-start;
         align-items: center;
         margin-top: 32px;
+        gap: 32px;
 
         li{
             position: relative;
