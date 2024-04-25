@@ -133,6 +133,7 @@ main .filter .dropdown-filter .dropdown__active .search-bar form input {
   width: 90%;
 }
 main .filter .dropdown-filter .dropdown__active .search-bar form .dropdown-search-submit {
+  margin-left: 8px;
   background-image: url("./../../asset/svg/loop.svg");
   background-repeat: no-repeat;
   background-position: center;

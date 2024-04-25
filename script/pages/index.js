@@ -136,9 +136,9 @@ const allIngredients = () => {
 
   recipes.forEach((recipe) => {
     recipe.ingredients.forEach((item) => {
-      if (ingredients.indexOf(item.ingredient) === -1) {
+      if (ingredients.indexOf(item.ingredient.toLowerCase()) === -1) {
         // Si l'ingrédient n'est pas encore dans le tableau
-        ingredients.push(item.ingredient);
+        ingredients.push(item.ingredient.toLowerCase());
       }
     });
   });
@@ -154,9 +154,9 @@ const allAppliance = () => {
   let appliances = [];
 
   recipes.forEach((recipe) => {
-    if (appliances.indexOf(recipe.appliance) === -1) {
+    if (appliances.indexOf(recipe.appliance.toLowerCase()) === -1) {
       // Si l'appareil n'est pas encore dans le tableau
-      appliances.push(recipe.appliance);
+      appliances.push(recipe.appliance.toLowerCase());
     }
   });
 
@@ -172,9 +172,9 @@ const allUstensils = () => {
 
   recipes.forEach((recipe) => {
     recipe.ustensils.forEach((item) => {
-      if (ustensils.indexOf(item) === -1) {
+      if (ustensils.indexOf(item.toLowerCase()) === -1) {
         // Si l'ustensile n'est pas encore dans le tableau
-        ustensils.push(item);
+        ustensils.push(item.toLowerCase());
       }
     });
   });
@@ -212,6 +212,26 @@ const dropdownInit = () => {
         });
         break;
     }
+  });
+
+  // Filtrage dans les dropdowns
+  dropdownActiveDOM.forEach((dropdownActive) => {
+    const searchInput = dropdownActive.querySelector('input[type="search"]');
+    searchInput.addEventListener('input', () => {
+      const searchTerm = searchInput.value.toLowerCase();
+      const dropdownList = dropdownActive.querySelector('.dropdown__suggest');
+      const dropdownItems = dropdownList.querySelectorAll(
+        '.dropdown__suggest-item'
+      );
+      dropdownItems.forEach((item) => {
+        const itemName = item.innerText.toLowerCase();
+        if (itemName.includes(searchTerm)) {
+          item.style.display = 'block';
+        } else {
+          item.style.display = 'none';
+        }
+      });
+    });
   });
 };
 
@@ -269,5 +289,9 @@ searchBarForm.addEventListener('submit', (e) => {
 activeFilterDivDOM.addEventListener('click', (e) => {
   e.preventDefault();
   e.stopPropagation();
-  if (e.target.tagName === 'LI') removeFilter(e.target);
+  if (e.target.tagName === 'LI') {
+    removeFilter(e.target);
+  } else {
+    closeDropdowns();
+  }
 });
