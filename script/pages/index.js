@@ -112,6 +112,9 @@ const removeFilter = (x) => {
   if (filters.length === 0) {
     activeFilterDivDOM.style.display = 'none';
     createRecipeDOM(recipes.slice(0, 6)); // Reset filtre;
+  } else {
+    const data = searchRecipes(filters);
+    createRecipeDOM(data);
   }
 };
 
@@ -214,21 +217,22 @@ const dropdownInit = () => {
 
 /**
  * Retourne le résultat de la recherche d'un utilisateur
- * @param {string} query - Recherche d'un utilisateur
+ * @param {Array} x - Tableau de filtres
  * @returns {Array} - Tableau des résultats
  */
-const searchRecipes = (query) => {
-  query = query.toLowerCase(); // On va travailler avec le lowerCase
-
+const searchRecipes = (x) => {
   return recipes.filter((recipe) => {
-    return (
-      // Recherche parmis les titres, descriptions et ingredients
-      recipe.name.toLowerCase().includes(query) ||
-      recipe.description.toLowerCase().includes(query) ||
-      recipe.ingredients.some((ingredient) => {
-        ingredient.ingredient.toLowerCase().includes(query);
-      })
-    );
+    // Pour chaque filtre, vérifiez si la recette correspond
+    return x.every((filter) => {
+      filter = filter.toLowerCase();
+      return (
+        recipe.name.toLowerCase().includes(filter) ||
+        recipe.description.toLowerCase().includes(filter) ||
+        recipe.ingredients.some((ingredient) =>
+          ingredient.ingredient.toLowerCase().includes(filter)
+        )
+      );
+    });
   });
 };
 
@@ -257,7 +261,7 @@ searchBarForm.addEventListener('submit', (e) => {
   e.stopPropagation();
   const query = e.currentTarget.querySelector('input').value;
   filters.push(query.toLowerCase()); // Ajout de la requete dans le tableau des filtres
-  const queryResult = searchRecipes(query);
+  const queryResult = searchRecipes(filters);
   createRecipeDOM(queryResult);
   createFilterDOM(filters);
 });
