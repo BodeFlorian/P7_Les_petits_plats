@@ -3,7 +3,7 @@ import recipes from './../../data/recipes.js';
 const recipesDOM = document.querySelector('.recipes');
 const dropdownDOM = document.querySelectorAll('.dropdown');
 const dropdownActiveDOM = document.querySelectorAll('.dropdown__active');
-const searchBar = document.querySelector('#search');
+const searchBarForm = document.querySelector('#search');
 const recipesNumber = document.querySelector('.recipes-number');
 
 /**
@@ -30,7 +30,6 @@ const createRecipeDOM = (x) => {
   recipesDOM.innerHTML = '';
 
   x.forEach((recipe) => {
-    console.log(recipe);
     const recipeDiv = createBlock('div', '', 'recipe');
 
     const recipeImg = createBlock('div', '', 'recipe__img');
@@ -200,6 +199,7 @@ const searchRecipes = (query) => {
 
 const init = () => {
   createRecipeDOM(recipes.slice(0, 6)); //Initialisation du site avec 6 recettes sans filtre.
+  recipesNumber.innerText = `${recipes.length + ' recettes'}`;
   dropdownInit();
 };
 
@@ -214,13 +214,15 @@ dropdownDOM.forEach((dropdown) => {
 });
 
 document.addEventListener('click', (e) => {
-  e.preventDefault();
   e.stopPropagation();
   closeDropdowns();
 });
 
-searchBar.addEventListener('keyup', (e) => {
-  const query = searchRecipes(e.currentTarget.value);
-  recipesNumber.innerText = `${query.length > 1 ? query.length + ' recettes' : query.length + ' recette'}`;
-  createRecipeDOM(query);
+searchBarForm.addEventListener('submit', (e) => {
+  e.preventDefault();
+  e.stopPropagation();
+  const query = e.currentTarget.querySelector('input').value;
+  const queryResult = searchRecipes(query);
+  recipesNumber.innerText = `${queryResult.length > 1 ? queryResult.length + ' recettes' : queryResult.length + ' recette'}`;
+  createRecipeDOM(queryResult);
 });
