@@ -160,7 +160,7 @@ main .filter .recipes-number {
 main .active-filter {
   max-width: 1440px;
   margin: auto;
-  display: flex;
+  display: none;
   justify-content: space-between;
   align-items: center;
   margin-top: 32px;

@@ -7,7 +7,7 @@ const searchBarForm = document.querySelector('#search');
 const recipesNumber = document.querySelector('.recipes-number');
 const activeFilterDOM = document.querySelector('.active-filter');
 
-let filters = [];
+let filters = []; // Tableau de filtre actif
 
 /**
  * Permet de créer un élément HTML;
@@ -90,6 +90,7 @@ const createRecipeDOM = (x) => {
  */
 const createFilterDOM = (x) => {
   activeFilterDOM.innerHTML = '';
+  activeFilterDOM.style.display = 'flex';
 
   x.forEach((filter) => {
     const filterDOM = createBlock('li', filter);
