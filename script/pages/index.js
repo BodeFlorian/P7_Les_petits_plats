@@ -249,6 +249,10 @@ const searchRecipes = (x) => {
       return (
         recipe.name.toLowerCase().includes(filter) ||
         recipe.description.toLowerCase().includes(filter) ||
+        recipe.appliance.toLowerCase().includes(filter) ||
+        recipe.ustensils.some((ustensil) =>
+          ustensil.toLowerCase().includes(filter)
+        ) ||
         recipe.ingredients.some((ingredient) =>
           ingredient.ingredient.toLowerCase().includes(filter)
         )
