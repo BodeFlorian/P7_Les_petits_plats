@@ -8,6 +8,7 @@ const recipesNumber = document.querySelector('.recipes-number');
 const activeFilterDivDOM = document.querySelector('.active-filter');
 
 let filters = []; // Tableau de filtre actif
+let filteredRecipes = recipes.slice(); // Copie des recettes filtrées
 
 /**
  * Permet de créer un élément HTML;
@@ -112,10 +113,14 @@ const removeFilter = (x) => {
   if (filters.length === 0) {
     activeFilterDivDOM.style.display = 'none';
     createRecipeDOM(recipes.slice(0, 6)); // Reset filtre;
+    filteredRecipes = recipes.slice();
   } else {
+    filteredRecipes = recipes.slice();
     const data = searchRecipes(filters);
     createRecipeDOM(data);
+    filteredRecipes = data.slice();
   }
+  updateDropdownOptions();
 };
 
 /**
@@ -137,13 +142,13 @@ const dropdownInit = () => {
 
     switch (dropdown.firstElementChild.innerText) {
       case 'Ingrédients':
-        items = allIngredients();
+        items = allIngredients(filteredRecipes);
         break;
       case 'Appareils':
-        items = allAppliance();
+        items = allAppliance(filteredRecipes);
         break;
       case 'Ustensiles':
-        items = allUstensils();
+        items = allUstensils(filteredRecipes);
         break;
     }
 
@@ -155,6 +160,8 @@ const dropdownInit = () => {
         const queryResult = searchRecipes(filters);
         createRecipeDOM(queryResult);
         createFilterDOM(filters);
+        filteredRecipes = queryResult.slice();
+        updateDropdownOptions();
       });
       suggest.appendChild(el);
     });
@@ -182,10 +189,54 @@ const dropdownInit = () => {
 };
 
 /**
+ * Met à jour les options des dropdowns en fonction des recettes filtrées
+ */
+const updateDropdownOptions = () => {
+  dropdownDOM.forEach((dropdown) => {
+    const suggest = dropdown.querySelector('.dropdown__suggest');
+    const searchTerm = dropdown
+      .querySelector('input[type="search"]')
+      .value.toLowerCase();
+    let items = [];
+
+    switch (dropdown.firstElementChild.innerText) {
+      case 'Ingrédients':
+        items = allIngredients(filteredRecipes);
+        break;
+      case 'Appareils':
+        items = allAppliance(filteredRecipes);
+        break;
+      case 'Ustensiles':
+        items = allUstensils(filteredRecipes);
+        break;
+    }
+
+    suggest.innerHTML = ''; // Efface les options actuelles
+
+    items.forEach((i) => {
+      if (i.toLowerCase().includes(searchTerm)) {
+        const el = createBlock('li', i, 'dropdown__suggest-item');
+        el.addEventListener('click', (e) => {
+          const query = e.target.innerText;
+          filters.push(query.toLowerCase());
+          const queryResult = searchRecipes(filters);
+          createRecipeDOM(queryResult);
+          createFilterDOM(filters);
+          filteredRecipes = queryResult.slice();
+          updateDropdownOptions();
+        });
+        suggest.appendChild(el);
+      }
+    });
+  });
+};
+
+/**
  * Retourne tous les ingrédients existants
+ * @param {Array} recipes - Recettes à considérer
  * @returns {Array} - Ingrédients disponibles
  */
-const allIngredients = () => {
+const allIngredients = (recipes) => {
   let ingredients = [];
 
   recipes.forEach((recipe) => {
@@ -201,10 +252,11 @@ const allIngredients = () => {
 };
 
 /**
- * Retourne tous les appareils exitants
+ * Retourne tous les appareils existants
+ * @param {Array} recipes - Recettes à considérer
  * @returns {Array} - Appareils disponibles
  */
-const allAppliance = () => {
+const allAppliance = (recipes) => {
   let appliances = [];
 
   recipes.forEach((recipe) => {
@@ -219,9 +271,10 @@ const allAppliance = () => {
 
 /**
  * Retourne tous les ustensiles existants
+ * @param {Array} recipes - Recettes à considérer
  * @returns {Array} - Ustensiles disponibles
  */
-const allUstensils = () => {
+const allUstensils = (recipes) => {
   let ustensils = [];
 
   recipes.forEach((recipe) => {
@@ -239,10 +292,10 @@ const allUstensils = () => {
 /**
  * Retourne le résultat de la recherche d'un utilisateur
  * @param {Array} x - Tableau de filtres
- * @returns {Array} - Tableau des résultats
+ * @returns {Array} - Tableau des recettes filtrées
  */
 const searchRecipes = (x) => {
-  return recipes.filter((recipe) => {
+  return filteredRecipes.filter((recipe) => {
     // Pour chaque filtre, vérifiez si la recette correspond
     return x.every((filter) => {
       filter = filter.toLowerCase();
@@ -289,6 +342,8 @@ searchBarForm.addEventListener('submit', (e) => {
   const queryResult = searchRecipes(filters);
   createRecipeDOM(queryResult);
   createFilterDOM(filters);
+  filteredRecipes = queryResult.slice();
+  updateDropdownOptions();
 });
 
 activeFilterDivDOM.addEventListener('click', (e) => {
