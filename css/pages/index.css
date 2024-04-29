@@ -145,6 +145,7 @@ main .filter .dropdown-filter .dropdown__active .search-bar form .dropdown-searc
 main .filter .dropdown-filter .dropdown__suggest {
   max-height: 20vh;
   overflow-y: scroll;
+  border-radius: 0 0 8px 8px;
 }
 main .filter .dropdown-filter .dropdown__suggest-item {
   cursor: pointer;
