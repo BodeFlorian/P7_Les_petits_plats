@@ -292,7 +292,7 @@ const allUstensils = (recipes) => {
 };
 
 /**
- * Retourne le résultat de la recherche d'un utilisateur
+ * Filtre les recettes en fonctions des demandes de l'utilisateur
  * @param {Array} x - Tableau de filtres
  * @returns {Array} - Tableau des recettes filtrées
  */
@@ -317,7 +317,7 @@ const searchRecipes = (x) => {
 };
 
 const init = () => {
-  createRecipeDOM(recipes.slice(0, 6)); //Initialisation du site avec 6 recettes sans filtre.
+  createRecipeDOM(recipes.slice(0, 6)); //Initialisation du site avec 6 recettes sans filtre -> Ajouter un bouton 'Load More' par la suite.
   dropdownInit();
 };
 
@@ -343,7 +343,9 @@ searchBarForm.addEventListener('submit', (e) => {
   e.stopPropagation();
   const query = e.currentTarget.querySelector('input').value;
   filters.push(query.toLowerCase()); // Ajout de la requete dans le tableau des filtres
+  //console.time('filtre');
   const queryResult = searchRecipes(filters);
+  //console.timeEnd('filtre');
   createRecipeDOM(queryResult);
   createFilterDOM(filters);
   filteredRecipes = queryResult.slice();
