@@ -40,7 +40,9 @@ const createRecipeDOM = (x) => {
     const img = createBlock('img', '', '');
     img.src = `./asset/img/recipes/${recipe.image}`;
     img.alt = recipe.name;
+    const time = createBlock('div', `${recipe.time} min`, 'recipe__time');
     recipeImg.appendChild(img);
+    recipeImg.appendChild(time);
 
     const recipeContent = createBlock('div', '', 'recipe__content');
 
@@ -319,7 +321,9 @@ const init = () => {
   dropdownInit();
 };
 
-init();
+document.addEventListener('DOMContentLoaded', () => {
+  init();
+});
 
 dropdownDOM.forEach((dropdown) => {
   dropdown.addEventListener('click', (e) => {

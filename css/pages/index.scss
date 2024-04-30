@@ -241,19 +241,18 @@ main{
                     object-fit: cover;
                     background-size: cover;
                 }
+            }
 
-                &::after {
-                    position: absolute;
-                    content: '10min';
-                    background-color: var(--accentColor);
-                    top: 0;
-                    right: 0;
-                    margin-top: 16px;
-                    margin-right: 24px;
-                    padding: 4px;
-                    border-radius: 8px;
-                    font-weight: 600;
-                }
+            &__time {
+                position: absolute;
+                background-color: var(--accentColor);
+                top: 0;
+                right: 0;
+                margin-top: 16px;
+                margin-right: 24px;
+                padding: 4px;
+                border-radius: 8px;
+                font-weight: 600;
             }
 
             &__content{

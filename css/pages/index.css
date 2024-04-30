@@ -212,9 +212,8 @@ main .recipes .recipe__img img {
      object-fit: cover;
   background-size: cover;
 }
-main .recipes .recipe__img::after {
+main .recipes .recipe__time {
   position: absolute;
-  content: "10min";
   background-color: var(--accentColor);
   top: 0;
   right: 0;
