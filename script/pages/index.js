@@ -39,8 +39,11 @@ document.addEventListener('click', (e) => {
 searchBarForm.addEventListener('submit', (e) => {
   e.preventDefault();
   e.stopPropagation();
-  const query = e.currentTarget.querySelector('input').value;
-  if (query.length <= 2) return;
+  const query = e.currentTarget.querySelector('input').value.trim();
+  if (query.length < 2) {
+    alert('La requête doit contenir au moins 2 caractères.');
+    return;
+  }
   filters.push(query.toLowerCase());
   const queryResult = searchRecipes(filters, filteredRecipes);
   createRecipeDOM(queryResult);
