@@ -6,7 +6,9 @@
  */
 export const searchRecipes = (x, filteredRecipes) => {
   const filtered = [];
-  const filtersLowerCase = x.map((filter) => filter.toLowerCase()); //On utilise lowercase pour filtrer sans problème.
+  const filtersLowerCase = x.map((filter) =>
+    decodeURIComponent(filter.toLowerCase())
+  ); //On utilise lowercase pour filtrer sans problème.
 
   for (let i = 0; i < filteredRecipes.length; i++) {
     const recipe = filteredRecipes[i];
