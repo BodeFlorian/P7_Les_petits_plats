@@ -42,8 +42,8 @@ searchBarForm.addEventListener('submit', (e) => {
   const inputElement = e.currentTarget.querySelector('input');
   const query = inputElement.value.trim();
 
-  if (query.length < 2) {
-    alert('La requête doit contenir au moins 2 caractères.');
+  if (query.length < 3) {
+    alert('La requête doit contenir au moins 3 caractères.');
     return;
   }
 
