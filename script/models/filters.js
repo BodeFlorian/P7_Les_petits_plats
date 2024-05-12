@@ -7,13 +7,13 @@
 export const searchRecipes = (x, filteredRecipes) => {
   return filteredRecipes.filter((recipe) => {
     return x.every((filter) => {
-      filter = filter.toLowerCase();
+      const decodedFilter = decodeURIComponent(filter).toLowerCase();
       return (
-        recipe.name.toLowerCase().includes(filter) ||
-        recipe.description.toLowerCase().includes(filter) ||
-        recipe.appliance.toLowerCase().includes(filter) ||
-        recipe.ustensils.some((ustensil) => ustensil.toLowerCase().includes(filter)) ||
-        recipe.ingredients.some((ingredient) => ingredient.ingredient.toLowerCase().includes(filter))
+        recipe.name.toLowerCase().includes(decodedFilter) ||
+        recipe.description.toLowerCase().includes(decodedFilter) ||
+        recipe.appliance.toLowerCase().includes(decodedFilter) ||
+        recipe.ustensils.some((ustensil) => ustensil.toLowerCase().includes(decodedFilter)) ||
+        recipe.ingredients.some((ingredient) => ingredient.ingredient.toLowerCase().includes(decodedFilter))
       );
     });
   });

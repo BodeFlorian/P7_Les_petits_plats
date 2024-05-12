@@ -31,7 +31,7 @@ export const createFilterDOM = (x, recipes, filtersArray) => {
   activeFilterDivDOM.style.display = 'flex';
 
   x.forEach((filter) => {
-    const filterDOM = createBlock('li', filter);
+    const filterDOM = createBlock('li', decodeURIComponent(filter));
     activeFilterDivDOM.appendChild(filterDOM);
   });
 };
@@ -45,7 +45,7 @@ export const createFilterDOM = (x, recipes, filtersArray) => {
  */
 export const removeFilter = (x, filteredRecipes, filters, recipes) => {
   const filterText = x.innerText.toLowerCase();
-  const index = filters.indexOf(filterText);
+  const index = filters.indexOf(encodeURIComponent(filterText));
   filters.splice(index, 1);
   x.parentNode.removeChild(x);
   if (filters.length === 0) {

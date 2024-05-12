@@ -10,51 +10,23 @@ const dropdownDOM = document.querySelectorAll('.dropdown');
 const dropdownActiveDOM = document.querySelectorAll('.dropdown__active');
 
 /**
- * Initialise les dropdowns avec les suggestions en fonction des recettes filtrées et des filtres appliqués
+ * Initialise les dropdowns avec les suggestions en fonction des recettes filtrées et des filtres appliqués + initialise la barre de recherche du dropdown.
  * @param {Array} filteredRecipes - Recettes filtrées
  * @param {Array} filters - Filtres appliqués
  */
 export const dropdownInit = (filteredRecipes, filters) => {
-  dropdownDOM.forEach((dropdown) => {
-    const suggest = dropdown.querySelector('.dropdown__suggest');
-    let items = [];
-
-    switch (dropdown.firstElementChild.innerText) {
-      case 'Ingrédients':
-        items = allIngredients(filteredRecipes);
-        break;
-      case 'Appareils':
-        items = allAppliance(filteredRecipes);
-        break;
-      case 'Ustensiles':
-        items = allUstensils(filteredRecipes);
-        break;
-    }
-
-    items.forEach((i) => {
-      const el = createBlock('li', i, 'dropdown__suggest-item');
-      el.addEventListener('click', (e) => {
-        const query = e.target.innerText;
-        filters.push(query.toLowerCase());
-        const queryResult = searchRecipes(filters, filteredRecipes);
-        createRecipeDOM(queryResult);
-        createFilterDOM(filters);
-        filteredRecipes = queryResult.slice();
-        updateDropdownOptions(filteredRecipes, filters);
-      });
-      suggest.appendChild(el);
-    });
-  });
+  updateDropdownOptions(filteredRecipes, filters);
 
   dropdownActiveDOM.forEach((dropdownActive) => {
     const searchInput = dropdownActive.querySelector('input[type="search"]');
     searchInput.addEventListener('input', () => {
       const searchTerm = searchInput.value.toLowerCase();
+      const encodedSearchTerm = encodeURIComponent(searchTerm);
       const dropdownList = dropdownActive.querySelector('.dropdown__suggest');
       const dropdownItems = dropdownList.querySelectorAll('.dropdown__suggest-item');
       dropdownItems.forEach((item) => {
         const itemName = item.innerText.toLowerCase();
-        if (itemName.includes(searchTerm)) {
+        if (itemName.includes(decodeURIComponent(encodedSearchTerm))) {
           item.style.display = 'block';
         } else {
           item.style.display = 'none';
@@ -82,6 +54,7 @@ export const updateDropdownOptions = (filteredRecipes, filters) => {
   dropdownDOM.forEach((dropdown) => {
     const suggest = dropdown.querySelector('.dropdown__suggest');
     const searchTerm = dropdown.querySelector('input[type="search"]').value.toLowerCase();
+    const encodedSearchTerm = encodeURIComponent(searchTerm);
     let items = [];
 
     switch (dropdown.firstElementChild.innerText) {
@@ -98,8 +71,9 @@ export const updateDropdownOptions = (filteredRecipes, filters) => {
 
     suggest.innerHTML = '';
 
+    // Ajout du filtre cliqué dans les mots clés.
     items.forEach((i) => {
-      if (i.toLowerCase().includes(searchTerm)) {
+      if (i.toLowerCase().includes(decodeURIComponent(encodedSearchTerm))) {
         const el = createBlock('li', i, 'dropdown__suggest-item');
         // Si un filtre dans le dropdown est cliqué.
         el.addEventListener('click', (e) => {

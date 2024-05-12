@@ -39,17 +39,25 @@ document.addEventListener('click', (e) => {
 searchBarForm.addEventListener('submit', (e) => {
   e.preventDefault();
   e.stopPropagation();
-  const query = e.currentTarget.querySelector('input').value.trim();
+  const inputElement = e.currentTarget.querySelector('input');
+  const query = inputElement.value.trim();
+
   if (query.length < 2) {
     alert('La requête doit contenir au moins 2 caractères.');
     return;
   }
-  filters.push(query.toLowerCase());
+
+  // Échapper les caractères spéciaux
+  const safeQuery = encodeURIComponent(query);
+
+  filters.push(safeQuery.toLowerCase());
   const queryResult = searchRecipes(filters, filteredRecipes);
   createRecipeDOM(queryResult);
   createFilterDOM(filters);
   filteredRecipes = queryResult.slice();
   updateDropdownOptions(filteredRecipes, filters);
+
+  inputElement.value = '';
 });
 
 activeFilterDivDOM.addEventListener('click', (e) => {
