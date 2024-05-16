@@ -10,6 +10,9 @@ const recipesNumber = document.querySelector('.recipes-number');
 export const createRecipeDOM = (x) => {
   recipesDOM.innerHTML = '';
 
+  recipesNumber.innerText = `${x.length > 1 ? x.length + ' recettes' : x.length + ' recette'}`;
+  if (x.length === 0) recipesDOM.innerHTML = '<p>Aucune recette trouvée.</p>';
+
   x.forEach((recipe) => {
     const recipeDiv = createBlock('div', '', 'recipe');
     const recipeImg = createBlock('div', '', 'recipe__img');
@@ -28,11 +31,7 @@ export const createRecipeDOM = (x) => {
     recipeDescription.appendChild(recipeDescriptionTuto);
     const recipeIngredients = createBlock('div', '', 'recipe__ingredients');
     const recipeIngredientsTitle = createBlock('h4', 'Ingrédients', '');
-    const recipeIngredientsWrapper = createBlock(
-      'div',
-      '',
-      'recipe__ingredients-wrapper'
-    );
+    const recipeIngredientsWrapper = createBlock('div', '', 'recipe__ingredients-wrapper');
     recipe.ingredients.forEach((ingredient) => {
       const ingredientDiv = createBlock('div', '', 'recipe__ingredient');
       const ingredientTitle = createBlock('h5', ingredient.ingredient, '');
@@ -54,6 +53,4 @@ export const createRecipeDOM = (x) => {
     recipeDiv.appendChild(recipeContent);
     recipesDOM.appendChild(recipeDiv);
   });
-
-  recipesNumber.innerText = `${x.length > 1 ? x.length + ' recettes' : x.length + ' recette'}`;
 };
